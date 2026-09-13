@@ -1,75 +1,138 @@
-# React + TypeScript + Vite
+# 💼 Job Application Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean and responsive web application for tracking job and internship applications in one place.
 
-Currently, two official plugins are available:
+Built with **React, TypeScript, Tailwind CSS, and LocalStorage**, this project focuses on practical application management with a polished, SaaS-style user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+* Add new job applications
+* Track company, position, applied date, status, and notes
+* Update application status
+* Edit and delete applications
+* Search applications by company or position
+* Filter applications by status
+* Dashboard statistics
+* Persistent data with LocalStorage
+* Toast notifications for user actions
+* Responsive design for desktop, tablet, and mobile
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Application Status
 
-## Expanding the ESLint configuration
+* 🟣 Applied
+* 🔵 Interview
+* 🟢 Offer
+* 🔴 Rejected
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* React
+* TypeScript
+* Tailwind CSS
+* React-Toastify
+* LocalStorage
+* Vite
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📸 Preview
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+> Demo GIF / screenshots will be added after the project is completed.
 
+<!-- Add screenshots or a demo GIF here -->
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/afiaafia/job-tracker.git
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Navigate to the project
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+cd job-tracker
 ```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+The application will be available at the local development URL shown in your terminal.
+
+## 📁 Project Structure
+
+```text
+src/
+├── components/
+│   ├── Dashboard.tsx
+│   ├── ApplicationForm.tsx
+│   ├── ApplicationCard.tsx
+│   ├── FilterBar.tsx
+│   └── UI/
+├── hooks/
+│   └── useLocalStorage.ts
+├── types/
+│   └── application.ts
+├── utils/
+│   └── stats.ts
+├── App.tsx
+└── main.tsx
+```
+
+## 🧩 Core Concepts
+
+This project demonstrates practical use of:
+
+* React components
+* Props
+* State management with `useState`
+* Side effects with `useEffect`
+* Controlled forms
+* Conditional rendering
+* Array methods
+* TypeScript interfaces and union types
+* LocalStorage persistence
+* Responsive UI design
+* Reusable components
+
+## 🗺️ Roadmap
+
+### Phase 1 — MVP
+
+* [x] Project setup
+* [ ] Application dashboard
+* [ ] Add application
+* [ ] Edit application
+* [ ] Delete application
+* [ ] Search and filtering
+* [ ] Statistics
+* [ ] LocalStorage
+* [ ] Toast notifications
+* [ ] Responsive UI
+
+### Phase 2 — Enhancements
+
+* [ ] Export applications as JSON
+* [ ] Import applications from JSON
+* [ ] Application tags
+* [ ] Interview date/reminder
+* [ ] Charts and analytics
+* [ ] Dark/light theme
+
+## 🎯 Goal
+
+The goal of this project is to build a practical, polished application while strengthening modern React and TypeScript development skills.
+
+## 👩‍💻 Author
+
+**Afia Mubassira**
+
+Learning Full Stack Web Development
