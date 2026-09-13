@@ -1,6 +1,7 @@
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
+import RecentApplications from './components/RecentApplications';
 
 function App() {
   return (
@@ -30,39 +31,7 @@ function App() {
 
               <Dashboard />
 
-              <section className="mt-8 rounded-2xl border border-[#E5EAF2] bg-white p-6 shadow-sm">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <h2 className="text-lg font-bold text-[#17233A]">
-                      Recent Applications
-                    </h2>
-
-                    <p className="mt-1 text-sm text-[#64748B]">
-                      Track your job applications and stay organized.
-                    </p>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="w-full rounded-xl bg-[#2563EB] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 sm:w-auto"
-                  >
-                    + Add Application
-                  </button>
-                </div>
-
-                <div className="mt-6 flex h-48 items-center justify-center rounded-xl border border-dashed border-[#E5EAF2] bg-[#F8FAFC]">
-                  <div className="text-center">
-                    <p className="text-sm font-semibold text-[#17233A]">
-                      Application list coming next
-                    </p>
-
-                    <p className="mt-1 text-xs text-[#64748B]">
-                      Search, filter, sort and application cards will be added
-                      here.
-                    </p>
-                  </div>
-                </div>
-              </section>
+              <RecentApplications />
             </div>
           </div>
         </main>
