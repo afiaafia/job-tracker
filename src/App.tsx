@@ -1,5 +1,6 @@
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
@@ -27,43 +28,7 @@ function App() {
                 </p>
               </section>
 
-              <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="rounded-2xl border border-[#E5EAF2] bg-white p-5 shadow-sm">
-                  <p className="text-sm font-medium text-[#64748B]">
-                    Total Applications
-                  </p>
-                  <p className="mt-3 text-3xl font-bold text-[#17233A]">24</p>
-                  <p className="mt-2 text-xs font-medium text-blue-600">
-                    ↑ 20% vs. last 30 days
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-[#E5EAF2] bg-white p-5 shadow-sm">
-                  <p className="text-sm font-medium text-[#64748B]">
-                    Interviews
-                  </p>
-                  <p className="mt-3 text-3xl font-bold text-[#17233A]">6</p>
-                  <p className="mt-2 text-xs font-medium text-blue-600">
-                    ↑ 50% vs. last 30 days
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-[#E5EAF2] bg-white p-5 shadow-sm">
-                  <p className="text-sm font-medium text-[#64748B]">Offers</p>
-                  <p className="mt-3 text-3xl font-bold text-[#17233A]">2</p>
-                  <p className="mt-2 text-xs font-medium text-green-600">
-                    ↑ 100% vs. last 30 days
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-[#E5EAF2] bg-white p-5 shadow-sm">
-                  <p className="text-sm font-medium text-[#64748B]">Rejected</p>
-                  <p className="mt-3 text-3xl font-bold text-[#17233A]">5</p>
-                  <p className="mt-2 text-xs font-medium text-red-500">
-                    ↓ 17% vs. last 30 days
-                  </p>
-                </div>
-              </section>
+              <Dashboard />
 
               <section className="mt-8 rounded-2xl border border-[#E5EAF2] bg-white p-6 shadow-sm">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
