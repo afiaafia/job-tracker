@@ -1,33 +1,43 @@
+import type { Application } from '../types/application';
+import useLocalStorage from '../hooks/useLocalStorage';
+import { getApplicationStats } from '../utils/stats';
 import StatsCard from './StatsCard';
 
 function Dashboard() {
+  const [applications] = useLocalStorage<Application[]>(
+    'jobtrack-applications',
+    []
+  );
+
+  const stats = getApplicationStats(applications);
+
   return (
     <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <StatsCard
         title="Total Applications"
-        value={24}
-        change="↑ 20% vs. last 30 days"
+        value={stats.total}
+        change="Current total"
         changeType="positive"
       />
 
       <StatsCard
         title="Interviews"
-        value={6}
-        change="↑ 50% vs. last 30 days"
+        value={stats.interviews}
+        change="Current total"
         changeType="positive"
       />
 
       <StatsCard
         title="Offers"
-        value={2}
-        change="↑ 100% vs. last 30 days"
+        value={stats.offers}
+        change="Current total"
         changeType="positive"
       />
 
       <StatsCard
         title="Rejected"
-        value={5}
-        change="↓ 17% vs. last 30 days"
+        value={stats.rejected}
+        change="Current total"
         changeType="negative"
       />
     </section>

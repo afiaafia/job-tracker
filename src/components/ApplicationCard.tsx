@@ -1,9 +1,13 @@
+import type { Status } from '../types/application';
+
 interface ApplicationCardProps {
   company: string;
   position: string;
   appliedDate: string;
-  status: 'Applied' | 'Interview' | 'Offer' | 'Rejected';
+  status: Status;
   notes: string;
+  onEdit: () => void;
+  onDelete: () => void;
 }
 
 function ApplicationCard({
@@ -12,6 +16,8 @@ function ApplicationCard({
   appliedDate,
   status,
   notes,
+  onEdit,
+  onDelete,
 }: ApplicationCardProps) {
   const statusStyles = {
     Applied: 'bg-blue-50 text-blue-600',
@@ -58,6 +64,7 @@ function ApplicationCard({
 
           <button
             type="button"
+            onClick={onEdit}
             aria-label={`Edit ${company} application`}
             className="flex h-9 w-9 items-center justify-center rounded-lg text-sm text-[#64748B] transition hover:bg-slate-100 hover:text-[#17233A]"
           >
@@ -66,6 +73,7 @@ function ApplicationCard({
 
           <button
             type="button"
+            onClick={onDelete}
             aria-label={`Delete ${company} application`}
             className="flex h-9 w-9 items-center justify-center rounded-lg text-sm text-[#64748B] transition hover:bg-rose-50 hover:text-rose-500"
           >
