@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 import type { Application, Status } from '../types/application';
 import useLocalStorage from '../hooks/useLocalStorage';
 import ApplicationCard from './ApplicationCard';
@@ -98,9 +99,19 @@ function RecentApplications() {
   };
 
   const handleDelete = (id: string) => {
+    const applicationToDelete = applications.find(
+      (application) => application.id === id
+    );
+
     setApplications((currentApplications) =>
       currentApplications.filter((application) => application.id !== id)
     );
+
+    if (applicationToDelete) {
+      toast.success(
+        `${applicationToDelete.company} application deleted successfully.`
+      );
+    }
   };
 
   const handleSubmitApplication = (applicationData: {
@@ -121,6 +132,10 @@ function RecentApplications() {
             : application
         )
       );
+
+      toast.success(
+        `${applicationData.company} application updated successfully.`
+      );
     } else {
       const newApplication: Application = {
         id: crypto.randomUUID(),
@@ -131,6 +146,10 @@ function RecentApplications() {
         newApplication,
         ...currentApplications,
       ]);
+
+      toast.success(
+        `${applicationData.company} application added successfully.`
+      );
     }
 
     handleCloseModal();
