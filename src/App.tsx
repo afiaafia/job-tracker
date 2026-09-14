@@ -1,16 +1,22 @@
+import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import RecentApplications from './components/RecentApplications';
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#F6F8FC] text-[#17233A]">
       <div className="flex min-h-screen">
-        <Sidebar />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
 
         <main className="min-w-0 flex-1">
-          <Header />
+          <Header onMenuClick={() => setIsSidebarOpen(true)} />
 
           <div className="px-4 py-6 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-350">

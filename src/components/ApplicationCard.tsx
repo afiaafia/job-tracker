@@ -27,21 +27,39 @@ function ApplicationCard({
   };
 
   return (
-    <div className="border-b border-[#E5EAF2] px-5 py-5 last:border-b-0">
-      <div className="grid gap-4 lg:grid-cols-[1.2fr_1.5fr_1fr_1fr_2fr_auto] lg:items-center">
-        <div>
-          <p className="text-sm font-semibold text-[#17233A]">{company}</p>
+    <div className="border-b border-[#E5EAF2] px-5 py-5 last:border-b-0 sm:px-6">
+      <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[1.2fr_1.5fr_1fr_1fr_2fr_auto] lg:items-center">
+        <div className="min-w-0">
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-[#94A3B8] lg:hidden">
+            Company
+          </p>
+
+          <p className="truncate text-sm font-semibold text-[#17233A]">
+            {company}
+          </p>
         </div>
 
-        <div>
+        <div className="min-w-0">
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-[#94A3B8] lg:hidden">
+            Position
+          </p>
+
           <p className="text-sm text-[#17233A]">{position}</p>
         </div>
 
         <div>
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-[#94A3B8] lg:hidden">
+            Applied Date
+          </p>
+
           <p className="text-sm text-[#64748B]">{appliedDate}</p>
         </div>
 
         <div>
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-[#94A3B8] lg:hidden">
+            Status
+          </p>
+
           <span
             className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${statusStyles[status]}`}
           >
@@ -49,11 +67,17 @@ function ApplicationCard({
           </span>
         </div>
 
-        <div>
-          <p className="line-clamp-2 text-sm text-[#64748B]">{notes}</p>
+        <div className="min-w-0">
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-[#94A3B8] lg:hidden">
+            Notes
+          </p>
+
+          <p className="line-clamp-2 text-sm text-[#64748B]">
+            {notes || 'No notes added.'}
+          </p>
         </div>
 
-        <div className="flex items-center gap-1 lg:justify-end">
+        <div className="flex items-center gap-1 border-t border-[#E5EAF2] pt-3 lg:border-0 lg:pt-0 lg:justify-end">
           <button
             type="button"
             aria-label={`View ${company} application`}
