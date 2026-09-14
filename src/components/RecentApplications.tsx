@@ -110,6 +110,38 @@ function RecentApplications() {
     setEditingApplication(null);
   };
 
+  const handleStatusChange = (id: string, status: Status) => {
+    const applicationToUpdate = applications.find(
+      (application) => application.id === id
+    );
+
+    setApplications((currentApplications) =>
+      currentApplications.map((application) =>
+        application.id === id
+          ? {
+              ...application,
+              status,
+            }
+          : application
+      )
+    );
+
+    setViewingApplication((currentApplication) =>
+      currentApplication?.id === id
+        ? {
+            ...currentApplication,
+            status,
+          }
+        : currentApplication
+    );
+
+    if (applicationToUpdate) {
+      toast.success(
+        `${applicationToUpdate.company} status updated to ${status}.`
+      );
+    }
+  };
+
   const handleDelete = (id: string) => {
     const applicationToDelete = applications.find(
       (application) => application.id === id
@@ -246,6 +278,9 @@ function RecentApplications() {
           application={viewingApplication}
           onClose={handleCloseDetails}
           onEdit={() => handleEdit(viewingApplication)}
+          onStatusChange={(status) =>
+            handleStatusChange(viewingApplication.id, status)
+          }
         />
       )}
 

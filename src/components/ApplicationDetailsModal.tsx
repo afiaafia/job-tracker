@@ -1,15 +1,17 @@
-import type { Application } from '../types/application';
+import type { Application, Status } from '../types/application';
 
 interface ApplicationDetailsModalProps {
   application: Application;
   onClose: () => void;
   onEdit: () => void;
+  onStatusChange: (status: Status) => void;
 }
 
 function ApplicationDetailsModal({
   application,
   onClose,
   onEdit,
+  onStatusChange,
 }: ApplicationDetailsModalProps) {
   const statusStyles = {
     Applied: 'bg-blue-50 text-blue-600',
@@ -36,7 +38,7 @@ function ApplicationDetailsModal({
             </h2>
 
             <p className="mt-1 text-sm text-[#64748B]">
-              Review the details of this application.
+              Review and update this application.
             </p>
           </div>
 
@@ -83,17 +85,28 @@ function ApplicationDetailsModal({
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#94A3B8]">
+              <label
+                htmlFor="application-status"
+                className="text-xs font-semibold uppercase tracking-wide text-[#94A3B8]"
+              >
                 Status
-              </p>
+              </label>
 
-              <span
-                className={`mt-1 inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+              <select
+                id="application-status"
+                value={application.status}
+                onChange={(event) =>
+                  onStatusChange(event.target.value as Status)
+                }
+                className={`mt-1 w-full rounded-lg border border-[#E5EAF2] px-3 py-2 text-xs font-semibold outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100 ${
                   statusStyles[application.status]
                 }`}
               >
-                {application.status}
-              </span>
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Offer">Offer</option>
+                <option value="Rejected">Rejected</option>
+              </select>
             </div>
           </div>
 
