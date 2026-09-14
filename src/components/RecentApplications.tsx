@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import type { Application, Status } from '../types/application';
 import useLocalStorage from '../hooks/useLocalStorage';
 import ApplicationCard from './ApplicationCard';
+import ApplicationDetailsModal from './ApplicationDetailsModal';
 import ApplicationModal from './ApplicationModal';
 import FilterBar from './FilterBar';
 
@@ -55,6 +56,8 @@ function RecentApplications() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingApplication, setEditingApplication] =
     useState<Application | null>(null);
+  const [viewingApplication, setViewingApplication] =
+    useState<Application | null>(null);
 
   const filteredApplications = useMemo(() => {
     const search = searchTerm.trim().toLowerCase();
@@ -88,7 +91,16 @@ function RecentApplications() {
     setIsModalOpen(true);
   };
 
+  const handleView = (application: Application) => {
+    setViewingApplication(application);
+  };
+
+  const handleCloseDetails = () => {
+    setViewingApplication(null);
+  };
+
   const handleEdit = (application: Application) => {
+    setViewingApplication(null);
     setEditingApplication(application);
     setIsModalOpen(true);
   };
@@ -210,6 +222,7 @@ function RecentApplications() {
                 appliedDate={application.appliedDate}
                 status={application.status}
                 notes={application.notes ?? ''}
+                onView={() => handleView(application)}
                 onEdit={() => handleEdit(application)}
                 onDelete={() => handleDelete(application.id)}
               />
@@ -227,6 +240,14 @@ function RecentApplications() {
           )}
         </div>
       </section>
+
+      {viewingApplication && (
+        <ApplicationDetailsModal
+          application={viewingApplication}
+          onClose={handleCloseDetails}
+          onEdit={() => handleEdit(viewingApplication)}
+        />
+      )}
 
       {isModalOpen && (
         <ApplicationModal
