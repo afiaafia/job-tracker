@@ -1,55 +1,22 @@
 import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import type { Application, Status } from '../types/application';
-import useLocalStorage from '../hooks/useLocalStorage';
 import ApplicationCard from './ApplicationCard';
 import ApplicationDetailsModal from './ApplicationDetailsModal';
 import ApplicationModal from './ApplicationModal';
 import FilterBar from './FilterBar';
 
-const initialApplications: Application[] = [
-  {
-    id: '1',
-    company: 'Google',
-    position: 'Frontend Developer',
-    appliedDate: '2026-09-10',
-    status: 'Interview',
-    notes: 'Technical round scheduled for next week.',
-  },
-  {
-    id: '2',
-    company: 'Microsoft',
-    position: 'Software Engineer Intern',
-    appliedDate: '2026-09-07',
-    status: 'Applied',
-    notes: 'Waiting for HR response.',
-  },
-  {
-    id: '3',
-    company: 'Shopify',
-    position: 'Frontend Intern',
-    appliedDate: '2026-09-03',
-    status: 'Offer',
-    notes: 'Received offer. Negotiating terms.',
-  },
-  {
-    id: '4',
-    company: 'Atlassian',
-    position: 'React Developer',
-    appliedDate: '2026-08-29',
-    status: 'Rejected',
-    notes: 'Good experience, but not a match this time.',
-  },
-];
+interface RecentApplicationsProps {
+  applications: Application[];
+  setApplications: React.Dispatch<React.SetStateAction<Application[]>>;
+}
 
 type SortOption = 'latest' | 'oldest' | 'company';
 
-function RecentApplications() {
-  const [applications, setApplications] = useLocalStorage<Application[]>(
-    'jobtrack-applications',
-    initialApplications
-  );
-
+function RecentApplications({
+  applications,
+  setApplications,
+}: RecentApplicationsProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<Status | 'all'>('all');
   const [sortBy, setSortBy] = useState<SortOption>('latest');
@@ -85,6 +52,8 @@ function RecentApplications() {
       return a.company.localeCompare(b.company);
     });
   }, [applications, searchTerm, statusFilter, sortBy]);
+
+  const hasActiveFilters = searchTerm.trim() !== '' || statusFilter !== 'all';
 
   const handleOpenAddModal = () => {
     setEditingApplication(null);
@@ -199,6 +168,11 @@ function RecentApplications() {
     handleCloseModal();
   };
 
+  const handleClearFilters = () => {
+    setSearchTerm('');
+    setStatusFilter('all');
+  };
+
   return (
     <>
       <section className="mt-8 overflow-hidden rounded-2xl border border-[#E5EAF2] bg-white shadow-sm">
@@ -260,14 +234,44 @@ function RecentApplications() {
               />
             ))
           ) : (
-            <div className="px-5 py-12 text-center">
-              <p className="text-base font-semibold text-[#17233A]">
-                No applications found
+            <div className="px-5 py-14 text-center sm:px-6">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl text-blue-600">
+                {hasActiveFilters ? '⌕' : '▣'}
+              </div>
+
+              <h3 className="mt-5 text-base font-bold text-[#17233A]">
+                {hasActiveFilters
+                  ? 'No matching applications'
+                  : 'No applications yet'}
+              </h3>
+
+              <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#64748B]">
+                {hasActiveFilters
+                  ? "We couldn't find any applications matching your current search or filter."
+                  : 'Start tracking your job search by adding your first application.'}
               </p>
 
-              <p className="mt-1 text-sm text-[#64748B]">
-                Try changing your search or filter.
-              </p>
+              <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
+                {hasActiveFilters && (
+                  <button
+                    type="button"
+                    onClick={handleClearFilters}
+                    className="rounded-xl border border-[#E5EAF2] bg-white px-4 py-2.5 text-sm font-semibold text-[#64748B] transition hover:bg-slate-50"
+                  >
+                    Clear Filters
+                  </button>
+                )}
+
+                {!hasActiveFilters && (
+                  <button
+                    type="button"
+                    onClick={handleOpenAddModal}
+                    className="rounded-xl bg-[#2563EB] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+                  >
+                    + Add Application
+                  </button>
+                )}
+              </div>
             </div>
           )}
         </div>

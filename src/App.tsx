@@ -3,9 +3,16 @@ import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import RecentApplications from './components/RecentApplications';
+import useLocalStorage from './hooks/useLocalStorage';
+import type { Application } from './types/application';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const [applications, setApplications] = useLocalStorage<Application[]>(
+    'jobtrack-applications',
+    []
+  );
 
   return (
     <div className="min-h-screen bg-[#F6F8FC] text-[#17233A]">
@@ -35,9 +42,12 @@ function App() {
                 </p>
               </section>
 
-              <Dashboard />
+              <Dashboard applications={applications} />
 
-              <RecentApplications />
+              <RecentApplications
+                applications={applications}
+                setApplications={setApplications}
+              />
             </div>
           </div>
         </main>
